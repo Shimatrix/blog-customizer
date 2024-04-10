@@ -11,7 +11,7 @@ type ArticleProps = {
 	styleState: CSSProperties;
 };
 
-export const Article = ({styleState}: ArticleProps) => {
+export const Article = ({ styleState }: ArticleProps) => {
 	return (
 		<article className={clsx(styles.article)} style={styleState}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>

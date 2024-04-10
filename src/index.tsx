@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties } from 'react';
+import { StrictMode, CSSProperties, useState } from 'react';
 import clsx from 'clsx';
-import { useState } from 'react';
 
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
@@ -14,7 +13,6 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
-
 	const [state, setState] = useState(defaultArticleState);
 	const [styleState, setStyleState] = useState({});
 
@@ -26,17 +24,20 @@ const App = () => {
 			'--container-width': state.contentWidth.value,
 			'--bg-color': state.backgroundColor.value,
 		} as CSSProperties);
-	};
+	}
 
 	function resetStyle() {
 		setStyleState({});
-	};
+	}
 
 	return (
-		<div
-			className={clsx(styles.main)}
-			style={styleState}>
-			<ArticleParamsForm state={state} setState={setState} changeStyle={changeStyle} resetStyle={resetStyle} />
+		<div className={clsx(styles.main)} style={styleState}>
+			<ArticleParamsForm
+				articleState={state}
+				setArticleState={setState}
+				changeStyle={changeStyle}
+				resetStyle={resetStyle}
+			/>
 			<Article styleState={styleState} />
 		</div>
 	);
