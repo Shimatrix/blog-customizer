@@ -21,21 +21,18 @@ import {
 import styles from './ArticleParamsForm.module.scss';
 
 type ArticleProps = {
-	articleState: typeof defaultArticleState;
-	setArticleState: React.Dispatch<
-		React.SetStateAction<typeof defaultArticleState>
-	>;
-	changeStyle: () => void;
+	defaultState: typeof defaultArticleState;
+	changeStyle: (state: typeof defaultArticleState) => void;
 	resetStyle: () => void;
 };
 
 export const ArticleParamsForm = ({
-	articleState,
-	setArticleState,
+	defaultState,
 	changeStyle,
 	resetStyle,
 }: ArticleProps) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [articleState, setArticleState] = useState(defaultState);
 	const formRef = useRef<HTMLDivElement>(null);
 
 	function handleClick() {
@@ -48,7 +45,7 @@ export const ArticleParamsForm = ({
 
 	function handleSetStyle(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		changeStyle();
+		changeStyle(articleState);
 	}
 
 	function handleResetStyle() {
